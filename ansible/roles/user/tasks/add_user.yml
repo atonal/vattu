@@ -1,12 +1,16 @@
 ---
 - name: Add the user {{ user }}
+  remote_user: pi
+  become: yes
   user:
     name: "{{ user }}"
-    groups: adm,sudo,audio,video,users
+    groups: adm,sudo,wheel,audio,video,users
     shell: /bin/bash
     generate_ssh_key: yes
 
 - name: Set authorized key taken from file
+  remote_user: pi
+  become: yes
   authorized_key:
     user: "{{ user }}"
     state: present
