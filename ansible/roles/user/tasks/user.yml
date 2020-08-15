@@ -1,0 +1,13 @@
+---
+- name: Add the user {{ user }}
+  user:
+    name: "{{ user }}"
+    groups: adm,sudo,audio,video,users
+    shell: /bin/bash
+    generate_ssh_key: yes
+
+- name: Set authorized key taken from file
+  authorized_key:
+    user: "{{ user }}"
+    state: present
+    key: "{{ lookup('file', '/home/{{ user }}/.ssh/id_rsa.pub') }}"

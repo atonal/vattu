@@ -1,0 +1,6 @@
+---
+- hosts: vattu
+  remote_user: pi
+  become: yes
+  roles:
+    - user
