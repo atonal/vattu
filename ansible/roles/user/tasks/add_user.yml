@@ -25,3 +25,13 @@
       - vim-gtk3
       - irssi
       - tmux
+
+- name: Clone dotfiles
+  git:
+    repo: https://github.com/atonal/dotfiles.git
+    dest: "/home/{{ user }}/dotfiles"
+
+- name: Install dotfiles
+  command: ./install.sh
+  args:
+    chdir: "/home/{{ user }}/dotfiles"
