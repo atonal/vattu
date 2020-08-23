@@ -1,0 +1,9 @@
+---
+- name: Test user access
+  become: yes
+  command: id
+  register: result
+
+- set_fact:
+    user_installed: true
+  when: result is success

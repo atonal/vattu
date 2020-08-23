@@ -1,5 +1,9 @@
 ---
-- import_tasks: wheel.yml
-- import_tasks: add_user.yml
+- import_tasks: test_user.yml
+- include_tasks: wheel.yml
+  when: not user_installed
+- include_tasks: add_user.yml
+  when: not user_installed
+- import_tasks: configure_user.yml
 - import_tasks: autologin.yml
 - import_tasks: remove_pi.yml

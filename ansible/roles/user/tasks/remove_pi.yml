@@ -1,12 +1,16 @@
 ---
 - name: Disable the password login for user 'pi'
-  remote_user: "{{ user }}"
   become: yes
   user:
     name: pi
     password: '!'
 
 - name: Remove authorized keys
+  become: yes
   file:
     path: /home/pi/.ssh/authorized_keys
     state: absent
+
+- name: set fact
+  set_fact:
+    pi_removed: true
