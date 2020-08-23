@@ -5,3 +5,8 @@
   user:
     name: pi
     password: '!'
+
+- name: Remove authorized keys
+  file:
+    path: /home/pi/.ssh/authorized_keys
+    state: absent
