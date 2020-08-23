@@ -2,8 +2,8 @@
 - hosts: vattu
   gather_facts: no
   pre_tasks:
-    - name: Wait 600 seconds for target connection to become reachable/usable
-      remote_user: pi
-      wait_for_connection:
+    - name: Wait 300 seconds for target connection to become reachable/usable
+      wait_for:
+        port: 22
   roles:
     - user
