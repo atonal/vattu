@@ -23,6 +23,20 @@
     regexp: '^autologin-user='
     line: "autologin-user={{ user }}"
 
+- name: Set {{ user }} as the autologin user
+  become: yes
+  lineinfile:
+    path: /etc/systemd/system/getty@tty1.service.d/autologin.conf
+    regexp: '^ExecStart=-/sbin/agetty --autologin'
+    line: "ExecStart=-/sbin/agetty --autologin {{ user }} --noclear %I $TERM"
+
+- name: Set {{ user }} as the autologin user
+  become: yes
+  lineinfile:
+    path: /etc/systemd/system/autologin@.service
+    regexp: '^ExecStart=-/sbin/agetty --autologin'
+    line: "ExecStart=-/sbin/agetty --autologin {{ user }} --noclear %I $TERM"
+
 - name: Install software
   become: yes
   apt:
