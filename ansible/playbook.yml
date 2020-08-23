@@ -7,3 +7,4 @@
         port: 22
   roles:
     - user
+    - spotify

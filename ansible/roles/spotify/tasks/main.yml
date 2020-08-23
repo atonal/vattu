@@ -1,0 +1,29 @@
+---
+- name: Add raspotify apt key
+  become: yes
+  apt_key:
+    url: https://dtcooper.github.io/raspotify/key.asc
+
+- name: Add raspotify repository
+  become: yes
+  apt_repository:
+    repo: deb https://dtcooper.github.io/raspotify raspotify main
+
+- name: Install raspotify
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+    name:
+      - curl
+      - apt-transport-https
+      - raspotify
+
+- name: Configure raspotify
+  become: yes
+  lineinfile:
+    path: /etc/default/raspotify
+    regexp: 'BITRATE='
+    line: 'BITRATE="320"'
+  notify:
+    - restart raspotify
