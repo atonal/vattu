@@ -1,4 +1,5 @@
 ---
 - import_tasks: wheel.yml
 - import_tasks: add_user.yml
+- import_tasks: autologin.yml
 - import_tasks: remove_pi.yml
