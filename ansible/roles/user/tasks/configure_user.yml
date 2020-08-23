@@ -9,12 +9,21 @@
       - irssi
       - tmux
 
-- name: Clone dotfiles
+- name: Check if home is git repo
   git:
-    repo: https://github.com/atonal/dotfiles.git
-    dest: "/home/{{ user }}/dotfiles"
+    repo: https://github.com/atonal/home.git
+    dest: "/home/{{ user }}"
+    clone: no
+    update: no
+  register: home_is_repo
 
-- name: Install dotfiles
-  command: ./install.sh
+- name: Init repo
+  shell: |
+    git init
+    git remote add origin https://github.com/atonal/home.git
+    git fetch
+    git checkout -f master
+    ./home-install.sh
   args:
-    chdir: "/home/{{ user }}/dotfiles"
+    chdir: "/home/{{ user }}"
+  when: home_is_repo.before is none
