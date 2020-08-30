@@ -4,3 +4,7 @@
   service:
     name: raspotify
     state: restarted
+
+- name: restore alsa
+  become: yes
+  command: alsactl restore
