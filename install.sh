@@ -7,3 +7,6 @@ raspbian_image="${root_dir}"/raspbian/2020-02-13-raspbian-buster.zip
 memory_card_dev=/dev/mmcblk0
 
 unzip -p "${raspbian_image}" | sudo dd of="${memory_card_dev}" bs=4M conv=fsync status=progress
+
+# New image invalidates previous host key, so remove the old one
+ssh-keygen -f "${HOME}/.ssh/known_hosts" -R "vattu.lan"
