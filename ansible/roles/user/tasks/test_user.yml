@@ -1,9 +1,9 @@
 ---
 - name: Test user access
-  become: yes
   command: id
   register: result
+  ignore_unreachable: true
 
 - set_fact:
     user_installed: true
-  when: result is success
+  when: "'stdout' in result and user in result.stdout"

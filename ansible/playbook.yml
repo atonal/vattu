@@ -3,6 +3,7 @@
   gather_facts: no
   pre_tasks:
     - name: Wait 300 seconds for target connection to become reachable/usable
+      remote_user: "{{ 'pi' if user_installed is defined and not user_installed else user }}"
       wait_for:
         port: 22
   roles:
