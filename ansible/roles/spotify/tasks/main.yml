@@ -28,6 +28,23 @@
   notify:
     - restart raspotify
 
+- name: check if asound file exists
+  stat:
+    path: /var/lib/alsa/asound.state
+  register: asound_state
+
+- name: Copy asound.state to host
+  become: yes
+  copy:
+    src: asound.state
+    dest: /var/lib/alsa/asound.state
+    owner: root
+    group: root
+    mode: '0644'
+  when: not asound_state.stat.exists
+  notify:
+    - restore alsa
+
 - name: Force audio output to jack
   # same as running: amixer cset numid=3 1
   # need to hook to?: name 'PCM Playback Route'
