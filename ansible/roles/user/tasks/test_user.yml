@@ -1,9 +1,0 @@
----
-- name: Test user access
-  command: id
-  register: result
-  ignore_unreachable: true
-
-- set_fact:
-    user_installed: true
-  when: "'stdout' in result and user in result.stdout"

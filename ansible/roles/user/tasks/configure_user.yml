@@ -1,4 +1,12 @@
 ---
+- name: Configure groups for {{ user }}
+  become: yes
+  user:
+    name: "{{ user }}"
+    groups: adm,sudo,wheel,audio,video,users
+    shell: /bin/bash
+    generate_ssh_key: yes
+
 - name: Install software
   become: yes
   apt:
