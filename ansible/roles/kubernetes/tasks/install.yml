@@ -1,0 +1,4 @@
+---
+- name: lazy install k3s
+  shell: curl -sfL https://get.k3s.io | sh -
+
