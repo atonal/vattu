@@ -16,6 +16,7 @@
       - vim-gtk3
       - irssi
       - tmux
+      - tig
 
 - name: Check if home is git repo
   git:
