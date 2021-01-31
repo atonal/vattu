@@ -19,12 +19,21 @@
       - apt-transport-https
       - raspotify
 
-- name: Configure raspotify
+- name: Configure bitrate
   become: yes
   lineinfile:
     path: /etc/default/raspotify
     regexp: 'BITRATE='
     line: 'BITRATE="320"'
+  notify:
+    - restart raspotify
+
+- name: Output to headphones jack
+  become: yes
+  lineinfile:
+    path: /etc/default/raspotify
+    regexp: 'OPTIONS='
+    line: 'OPTIONS="--device hw:1,0"'
   notify:
     - restart raspotify
 
